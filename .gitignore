@@ -3,6 +3,7 @@
 /META.yml
 /META.json
 /MYMETA.*
+*.c
 *.o
 *.pm.tdy
 *.bs
