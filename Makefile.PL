@@ -4,15 +4,13 @@ use ExtUtils::MakeMaker;
 # the contents of the Makefile that is written.
 WriteMakefile(
     'NAME'		=> 'Algorithm::LCS::XS',
-    'VERSION_FROM'	=> 'XS.pm', # finds $VERSION
-    'PREREQ_PM'		=> {}, # e.g., Module::Name => 1.1
-    ($] >= 5.005 ?    ## Add these new keywords supported since 5.005
-      (ABSTRACT_FROM => 'XS.pm', # retrieve abstract from module
-       AUTHOR     => 'Joe Schaefer <joe+cpan@sunstarsys.com>') : ()),
-    'LIBS'		=> [''], # e.g., '-lm'
-    'DEFINE'		=> '', # e.g., '-DHAVE_SOMETHING'
-    'INC'		=> '-I.', # e.g., '-I. -I/usr/include/other'
-	# Un-comment this if you add C files to link with later:
-    # 'OBJECT'		=> '$(O_FILES)', # link all the C files too
+    'VERSION_FROM'	=> 'XS.pm',
+    'MIN_PERL_VERSION'  => '5.8.0',
+    'PREREQ_PM'		=> { 'Algorithm::Diff' => 0 },
+    'ABSTRACT_FROM'     => 'XS.pm', # retrieve abstract from module
+    'AUTHOR'            => 'Joe Schaefer <joe+cpan@sunstarsys.com>',
+    'LIBS'		=> [''],
+    'DEFINE'		=> '',
     'SIGN'              => 1,
+    'test'              => { TESTS => "t/*.t" },
 );

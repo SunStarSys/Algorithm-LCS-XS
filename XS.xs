@@ -2,8 +2,6 @@
 #include "perl.h"
 #include "XSUB.h"
 
-#include "ppport.h"
-
 struct LK {
  struct LK *link;
         IV i;

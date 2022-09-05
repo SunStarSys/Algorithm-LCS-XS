@@ -5,7 +5,7 @@ use Benchmark ':all';
 
 # change 'tests => 1' to 'tests => last_test_to_print';
 
-use Test::More tests => 16;
+use Test::More tests => 17;
 BEGIN { use_ok('Algorithm::LCS::XS') };
 
 #########################
@@ -34,10 +34,11 @@ ok $a[$lcs2[$_][0]] eq $b[$lcs2[$_][1]] for 0..3;
 
 my $non_xs = sub { Algorithm::Diff::LCSidx(\@a, \@b) };
 my $xs_lcs = sub { $alg->LCS(\@a, \@b) };
-my $xs_cb = sub { $alg->callback(\@a) };
+my $xs_cb = sub { $cb->(\@a) };
 
 my ($l, $r) = $non_xs->();
 ok @$l == @$r;
+ok @$l == 4;
 ok $a[$l[$_]] eq $b[$r[$_]] for 0..3;
 
 cmpthese 1_000_000 => { non_xs => $non_xs, xs_lcs => $xs_lcs, xs_cb => $xs_cb };
