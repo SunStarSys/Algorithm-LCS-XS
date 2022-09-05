@@ -1,0 +1,10 @@
+^MANIFEST\.
+\.o$
+\.c$
+\.bs$
+pm_to_blib
+\blib\b
+^lib\b
+^.git
+^Algorithm-LCS-XS-
+MYMETA\.
