@@ -8,3 +8,5 @@ pm_to_blib
 ^.git
 ^Algorithm-LCS-XS-
 MYMETA\.
+^Makefile$
+^Makefile\.old$
