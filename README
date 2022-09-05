@@ -1,7 +1,7 @@
-Algorithm/LCS version 1.04
-==========================
+Algorithm/LCS/XS
+================
 
-Algorithm::LCS reimplements Algorithm::Diff's core loop in XS,
+Algorithm::LCS::XS reimplements Algorithm::Diff's core loop in XS,
 and provides a simple OO interface to it.
 
 INSTALLATION
