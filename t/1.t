@@ -41,4 +41,16 @@ ok @$l == @$r;
 ok @$l == 4;
 ok $a[$l[$_]] eq $b[$r[$_]] for 0..3;
 
-cmpthese 1_000_000 => { non_xs => $non_xs, xs_lcs => $xs_lcs, xs_cb => $xs_cb };
+use LCS::BV;
+my $obj = LCS::BV->new;
+my $positions = $obj->prepare(\@a);
+
+my $bv_llcs = sub { $obj->LLCS_prepared($positions, \@b) };
+
+
+use LCS::XS;
+
+my $alg2 = LCS::XS->new;
+my $lcs_xs = sub { $alg2->LCS(\@a, \@b) };
+
+cmpthese 1_000_000 => { non_xs => $non_xs, xs_lcs => $xs_lcs, xs_cb => $xs_cb, bv_llcs => $bv_llcs, lcs_xs => $lcs_xs };
