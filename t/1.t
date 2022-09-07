@@ -36,8 +36,8 @@ ok @lcs2 == 40;
 ok $a[$lcs2[$_][0]] eq $b[$lcs2[$_][1]] for 0..39;
 
 my $non_xs = sub { Algorithm::Diff::LCSidx(\@a, \@b) };
-my $xs_lcs = sub { $alg->LCS(\@a, \@b) };
-my $xs_cb = sub { $cb->(\@a) };
+my $my_xs_lcs = sub { $alg->LCS(\@a, \@b) };
+my $my_xs_cb = sub { $cb->(\@a) };
 
 my ($l, $r) = $non_xs->();
 ok @$l == @$r;
@@ -56,4 +56,4 @@ use LCS::XS;
 my $alg2 = LCS::XS->new;
 my $lcs_xs = sub { $alg2->LCS(\@a, \@b) };
 
-cmpthese 100_000 => { non_xs => $non_xs, xs_lcs => $xs_lcs, xs_cb => $xs_cb, bv_llcs => $bv_llcs, lcs_xs => $lcs_xs };
+cmpthese 100_000 => { non_xs => $non_xs, my_xs_lcs => $my_xs_lcs, my_xs_cb => $my_xs_cb, bv_llcs => $bv_llcs, lcs_xs => $lcs_xs };
