@@ -53,11 +53,11 @@ my $obj = LCS::BV->new;
 my $positions = $obj->prepare(\@a);
 
 my $bv_llcs = sub { $obj->LLCS_prepared($positions, \@b) };
-
+my $bv_lcs = sub { $obj->LCS(\@a, \@b) };
 
 use LCS::XS;
 
 my $alg2 = LCS::XS->new;
 my $lcs_xs = sub { $alg2->LCS(\@a, \@b) };
 
-cmpthese 100_000 => { ad_lcsidx => $ad_lcsidx, ad_lcs => $ad_lcs, my_adlcs => $my_adlcs, my_lcsidx => $my_lcsidx, my_xs_cb => $my_xs_cb, bv_llcs => $bv_llcs, lcs_xs => $lcs_xs };
+cmpthese 100_000 => { ad_lcsidx => $ad_lcsidx, ad_lcs => $ad_lcs, my_adlcs => $my_adlcs, my_lcsidx => $my_lcsidx, my_xs_cb => $my_xs_cb, bv_lcs => $bv_lcs, bv_llcs => $bv_llcs, lcs_xs => $lcs_xs };
