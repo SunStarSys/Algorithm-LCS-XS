@@ -13,6 +13,7 @@ BEGIN { use_ok('Algorithm::LCS::XS') };
 # Insert your test code below, the Test::More module is use()ed here so read
 # its man page ( perldoc Test::More ) for help writing this test script.
 
+use Algorithm::LCS::XS qw/ADLCS LCSidx/;
 use Algorithm::Diff;
 use POSIX 'dup2';
 dup2 fileno(STDERR), fileno(STDOUT);
@@ -35,11 +36,14 @@ my @lcs2 = $cb->(\@a);
 ok @lcs2 == 40;
 ok $a[$lcs2[$_][0]] eq $b[$lcs2[$_][1]] for 0..39;
 
-my $non_xs = sub { Algorithm::Diff::LCSidx(\@a, \@b) };
+my $ad_lcsidx = sub { Algorithm::Diff::LCSidx(\@a, \@b) };
+my $ad_lcs = sub {Algorithm::Diff::LCS(\@a, \@b) };
 my $my_xs_lcs = sub { $alg->LCS(\@a, \@b) };
 my $my_xs_cb = sub { $cb->(\@a) };
+my $my_adlcs = sub { ADLCS(\@a, \@b) };
+my $my_lcsidx = sub {LCSidx(\@a, \@b) };
 
-my ($l, $r) = $non_xs->();
+my ($l, $r) = $my_lcsidx->();
 ok @$l == @$r;
 ok @$l == 40;
 ok $a[$l[$_]] eq $b[$r[$_]] for 0..39;
@@ -56,4 +60,4 @@ use LCS::XS;
 my $alg2 = LCS::XS->new;
 my $lcs_xs = sub { $alg2->LCS(\@a, \@b) };
 
-cmpthese 100_000 => { non_xs => $non_xs, my_xs_lcs => $my_xs_lcs, my_xs_cb => $my_xs_cb, bv_llcs => $bv_llcs, lcs_xs => $lcs_xs };
+cmpthese 100_000 => { ad_lcsidx => $ad_lcsidx, ad_lcs => $ad_lcs, my_adlcs => $my_adlcs, my_lcsidx => $my_lcsidx, my_xs_cb => $my_xs_cb, bv_llcs => $bv_llcs, lcs_xs => $lcs_xs };
