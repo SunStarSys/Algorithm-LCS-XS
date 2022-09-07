@@ -18,8 +18,8 @@ use Algorithm::Diff;
 use POSIX 'dup2';
 dup2 fileno(STDERR), fileno(STDOUT);
 
-my @a = (qw/a b d c e f/) x 10;
-my @b = (qw/a c d b e f/) x 10;
+my @a = (qw/aaaaaaaaa bbbbbbbbb ddddddddd ccccccccc eeeeeeeee fffffffff/) x 10;
+my @b = (qw/aaaaaaaaa ccccccccc ddddddddd bbbbbbbbb eeeeeeeee fffffffff/) x 10;
 
 $|++;
 
