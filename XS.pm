@@ -130,7 +130,7 @@ LCS() call.
 
 Send @lines to a hashref containing elements of the form
 
-       array entry => [(increasing) list of matching indices]
+       @lines entry => [(increasing) list of matching indices]
 
 =item callback(@lines)
 
