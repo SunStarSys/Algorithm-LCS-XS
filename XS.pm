@@ -4,7 +4,7 @@ use 5.008;
 use strict;
 use warnings;
 use version;
-our $VERSION = qv(2.0.0);
+our $VERSION = qv(2.0.1);
 use base 'Exporter';
 our @EXPORT_OK = qw/&ADLCS &LCSidx/;
 require XSLoader;
@@ -71,7 +71,7 @@ sub ADLCS {
     $alg //= Algorithm::LCS::XS->new;
     my @rv;
     for my $arr ($alg->LCS(@_)) {
-      $rv[$arr->[0]] = $_[1][$arr->[0]];
+      $rv[$$arr[0]] = $_[0][$$arr[0]];
     }
     return wantarray ? @rv : \@rv;
 }
